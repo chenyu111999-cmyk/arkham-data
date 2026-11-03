@@ -1,8 +1,8 @@
 {
-  "code": 208,
-  "name": "3.36.8",
-  "url": "https://chenyu111999-cmyk.github.io/arkham-data/arkham-helper-3.36.8.apk",
+  "code": 209,
+  "name": "3.36.9",
+  "url": "https://chenyu111999-cmyk.github.io/arkham-data/arkham-helper-3.36.9.apk",
   "sig": "520e52a770b2a07f",
-  "note": "· 打赏支持补上支付宝收款码，可与微信切换\n· 收款码中心改用应用图标\n· 修复上一版更新时误判新版本的问题",
-  "note_en": "· Alipay QR added to the tip dialog, switchable with WeChat\n· QR centre now uses the app icon\n· Fixed a stale-manifest false update"
+  "note": "· 微信收款码中心也改用应用图标，与支付宝码风格统一\n· 其余无改动",
+  "note_en": "· WeChat QR centre now uses the app icon too, matching Alipay\n· No other changes"
 }
