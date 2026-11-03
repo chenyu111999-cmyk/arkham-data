@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "updated": "2026-11-04",
+ "decks": [
+  {
+   "id": "ref-001",
+   "name": "Roland Banks - Structure Deck Series ( Core Set )",
+   "inv": "01001",
+   "by": "Uncle George the Farmer",
+   "code": "AHC16QcAAAAR7gcBCgEBAgMCAQIBAgECAQEBAgwCAgIvAgECAQIBAgICAgIv",
+   "xp": 0,
+   "tags": [],
+   "note": "",
+   "likes": 1948,
+   "date": "2026-11-04",
+   "src": "arkhamdb"
+  },
+  {
+   "id": "ref-002",
+   "name": "Jenny \"Campaign-Breaker\" Barnes",
+   "inv": "02003",
+   "by": "ADHiDef",
+   "code": "AHC10w8AAAAUgAgBFQEDAgECAQEBAQsCGAIBAgECAQIBAgEBAQIBApUHAQ4BewElAQQCog",
+   "xp": 0,
+   "tags": [],
+   "note": "",
+   "likes": 1720,
+   "date": "2026-11-04",
+   "src": "arkhamdb"
+  },
+  {
+   "id": "ref-003",
+   "name": "Knowledge Overwhelming(Solo Deck)",
+   "inv": "01002",
+   "by": "AegriSomnia",
+   "code": "AHC16gcAAAAR8AcBFgIBAgEBAQICAQECAQICAhQCAQIBAgQCAQIBAhUCBAJ6",
+   "xp": 0,
+   "tags": [],
+   "note": "",
+   "likes": 1602,
+   "date": "2026-11-04",
+   "src": "arkhamdb"
+  },
+  {
+   "id": "ref-004",
+   "name": "Diana - Practicing Safe Hex - Now Even Hexier (Hard Mode)",
+   "inv": "05004",
+   "by": "StartWithTheName",
+   "code": "AHC1jCcAAAAWowgCAQIDAgECAQLEBwKbAQIGAssGAngC7AYBAwJNAikCLwKwBgEBAQcCCwIBAXwBAQLm",
+   "xp": 0,
+   "tags": [],
+   "note": "",
+   "likes": 1582,
+   "date": "2026-11-04",
+   "src": "arkhamdb"
+  },
+  {
+   "id": "ref-005",
+   "name": "Zoey Samaras: The Stabbing Chef",
+   "inv": "02001",
+   "by": "Heyenzzz",
+   "code": "AHC10Q8AAAAS-gcCAQEBAgICAQIBAQECFwImAgICAQECAgECAQKRBwEQAgIBDALy",
+   "xp": 0,
+   "tags": [],
+   "note": "",
+   "likes": 1550,
+   "date": "2026-11-04",
+   "src": "arkhamdb"
+  },
+  {
+   "id": "ref-006",
+   "name": "Broke-ass Pete's Spooky Adventure",
+   "inv": "02005",
+   "by": "Dedalus",
+   "code": "AHC11Q8AAAAThggCBwEYAgsBAQICAgQCAQIBAQUBAwIBAQECAQIBApkHARICAQIBAYY",
+   "xp": 0,
+   "tags": [],
+   "note": "",
+   "likes": 1138,
+   "date": "2026-11-04",
+   "src": "arkhamdb"
+  }
+ ]
+}
