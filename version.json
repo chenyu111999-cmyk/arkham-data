@@ -1,8 +1,8 @@
 {
-  "code": 999,
-  "name": "3.36.5",
-  "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.36.5.apk",
+  "code": 206,
+  "name": "3.36.6",
+  "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.36.6.apk",
   "sig": "520e52a770b2a07f",
-  "note": "· 接通远程名单与版本检查（服务器：chenyu111999-cmyk/arkham-data）\n· 「再抽一次」结果卡整块闪烁\n· 「恢复默认构成」档位名跟随当前难度\n· 更新支持应用内下载并拉起系统安装器",
-  "note_en": "· Remote supporter list and update check are now live\n· Chaos bag: the result card blinks when drawing again\n· Reset to default now shows the selected difficulty\n· In-app download and system installer for updates"
+  "note": "· 修复「下载并安装」总是提示「安装包与本应用不匹配」（签名比对漏了摘要）\n· 若仍不匹配，提示会附带本机与包内指纹，便于定位\n· 远端名单与检查更新继续可用",
+  "note_en": "· Fixed \"the downloaded file isn't this app\" always appearing (signature comparison skipped hashing)\n· If it still mismatches, the prompt now shows both fingerprints\n· Remote supporter list and update check keep working"
 }
