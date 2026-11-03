@@ -1,8 +1,8 @@
 {
-  "code": 206,
+  "code": 999,
   "name": "3.36.6",
   "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.36.6.apk",
   "sig": "520e52a770b2a07f",
-  "note": "· 修复「下载并安装」总是提示「安装包与本应用不匹配」（签名比对漏了摘要）\n· 若仍不匹配，提示会附带本机与包内指纹，便于定位\n· 远端名单与检查更新继续可用",
-  "note_en": "· Fixed \"the downloaded file isn't this app\" always appearing (signature comparison skipped hashing)\n· If it still mismatches, the prompt now shows both fingerprints\n· Remote supporter list and update check keep working"
+  "note": "· 测试用版本号",
+  "note_en": "· Test build"
 }
