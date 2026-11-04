@@ -153,7 +153,8 @@ FAIL=0
 check() {
   local label=$1 url=$2 want=$3
   local code
-  code=$(curl -s -o /dev/null -w '%{http_code}' -m 8 "$url" 2>/dev/null || echo 000)
+  code=$(curl -s -o /dev/null -w '%{http_code}' -m 8 "$url" 2>/dev/null)
+  case "$code" in ''|*[!0-9]*) code=000 ;; esac
   if [ "$code" = "$want" ]; then ok "$label  $code"; else bad "$label  期望 $want 实际 $code"; FAIL=$((FAIL+1)); fi
 }
 check "GET /health" "http://127.0.0.1:$PORT/health" 200
