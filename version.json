@@ -1,1 +1,8 @@
-{}
+{
+  "code": 213,
+  "name": "3.39.0",
+  "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.39.0.apk",
+  "sig": "520e52a770b2a07f",
+  "note": "· 「我的牌组」每张卡片右侧新增「分享」「投稿」按钮，不用再靠长按\n· 社区投票按钮改为带「投票」字样的描边胶囊，投过变实心金底显示「已投」\n· 社区入口移到顶栏「我的牌组」右边，随时可进\n· 长按牌组只保留「删除」，避免误触毁掉一套牌",
+  "note_en": "· Share / Submit buttons added to each deck row; no more hidden long-press\n· Vote control is now a bordered pill labelled \"Vote\", filled gold with \"Voted\" after voting\n· Community entry moved next to \"My Decks\" in the top bar\n· Long-press now only offers Delete to avoid accidental data loss"
+}
