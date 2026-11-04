@@ -169,13 +169,32 @@ case "$DL" in
 esac
 
 # /ping 必须能写库：拿一个固定测试 ID 报一次，看 today 有没有数
+SELFTEST_ID="install-selftest-0001"
 PING=$(curl -s -m 8 -X POST "http://127.0.0.1:$PORT/ping" \
   -H 'Content-Type: application/json' \
-  -d '{"deviceId":"install-selftest-0001"}' 2>/dev/null || "")
+  -d "{\"deviceId\":\"$SELFTEST_ID\"}" 2>/dev/null || "")
 case "$PING" in
   *'"ok":true'*) ok "POST /ping  $PING" ;;
   *)             bad "POST /ping 返回 $PING"; FAIL=$((FAIL+1)) ;;
 esac
+
+# 自检写进去的那一行要立刻删掉：每跑一次 apply.sh 都会多一个「设备」，
+# 审核页的今日/7 日均就永久偏高。who 的算法与 worker.js 完全一致，
+# 所以这里能用同样的 SHA-256 找回自己那一行，不会碰到真实用户的数据。
+if [ -f "$DB" ]; then
+  SELFTEST_SALT=$(grep -E '^SALT=' "$APP_DIR/env" 2>/dev/null | head -1 | cut -d= -f2-)
+  SELFTEST_DAY=$(TZ=Asia/Shanghai date +%F)
+  SELFTEST_WHO="d$(printf '%s' "$SELFTEST_ID|$SELFTEST_DAY|${SELFTEST_SALT:-arkham}" | sha256sum | cut -c1-16)"
+  CLEAN=$($AS_ARKHAM "$NODE" $SQLITE_FLAG -e "
+    const {DatabaseSync}=require('node:sqlite');
+    const db=new DatabaseSync(process.argv[1]);
+    const r=db.prepare('DELETE FROM daily WHERE day=? AND who=?').run(process.argv[2],process.argv[3]);
+    console.log(r.changes);
+  " "$DB" "$SELFTEST_DAY" "$SELFTEST_WHO" 2>/dev/null | tail -1)
+  if [ "$CLEAN" = "1" ]; then ok "自检记录已清理（今日设备数不含这次自检）"
+  elif [ "$CLEAN" = "0" ]; then ok "自检记录未落库或已清理"
+  else warn "自检记录清理返回 '$CLEAN'，可手动删：DELETE FROM daily WHERE day='$SELFTEST_DAY'"; fi
+fi
 
 # 建表失败时 /ping 会 500，这里能兜住；反过来也说明 SALT 和表都就位了
 echo
