@@ -53,7 +53,7 @@ fi
 say "1/6 拉取新文件"
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
-for f in worker.js server.mjs dl-index.html; do
+for f in worker.js server.mjs schema.sql dl-index.html; do
   if ! curl -fsSL -m 90 -o "$TMP/$f" "$BASE/$f"; then
     bad "下载 $f 失败，检查网络或镜像地址"
     warn "可以换镜像重试：BASE=https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/deploy sudo bash $0"
@@ -63,8 +63,17 @@ for f in worker.js server.mjs dl-index.html; do
 done
 
 say "2/6 语法检查（不通过就不动线上文件）"
-"$NODE" --check "$TMP/worker.js" 2>&1 | head -5 && ok "worker.js 语法正常" || { bad "worker.js 语法有误，已中止"; exit 1; }
-"$NODE" --check "$TMP/server.mjs" 2>&1 | head -5 && ok "server.mjs 语法正常" || { bad "server.mjs 语法有误，已中止"; exit 1; }
+# 不用 head 接管道：pipefail 下 head 提前退出会让 node 收到 SIGPIPE，把好文件误判成语法错
+if "$NODE" --check "$TMP/worker.js" >/dev/null 2>&1; then
+  ok "worker.js 语法正常"
+else
+  bad "worker.js 语法有误，已中止："; "$NODE" --check "$TMP/worker.js" 2>&1 | head -8; exit 1
+fi
+if "$NODE" --check "$TMP/server.mjs" >/dev/null 2>&1; then
+  ok "server.mjs 语法正常"
+else
+  bad "server.mjs 语法有误，已中止："; "$NODE" --check "$TMP/server.mjs" 2>&1 | head -8; exit 1
+fi
 grep -q '/ping' "$TMP/worker.js" || { bad "worker.js 里没有 /ping，下载到的不对"; exit 1; }
 grep -q 'serveDl\|/dl' "$TMP/server.mjs" || { bad "server.mjs 里没有 /dl 路由"; exit 1; }
 ok "关键改动都在"
@@ -110,9 +119,10 @@ fi
 say "5/6 替换文件"
 cp -f "$TMP/worker.js" "$APP_DIR/worker.js"
 cp -f "$TMP/server.mjs" "$APP_DIR/node/server.mjs"
-chown root:root "$APP_DIR/worker.js" "$APP_DIR/node/server.mjs"
-chmod 644 "$APP_DIR/worker.js" "$APP_DIR/node/server.mjs"
-ok "worker.js / server.mjs 已替换"
+cp -f "$TMP/schema.sql" "$APP_DIR/schema.sql"
+chown root:root "$APP_DIR/worker.js" "$APP_DIR/node/server.mjs" "$APP_DIR/schema.sql"
+chmod 644 "$APP_DIR/worker.js" "$APP_DIR/node/server.mjs" "$APP_DIR/schema.sql"
+ok "worker.js / server.mjs / schema.sql 已替换"
 
 mkdir -p "$APP_DIR/dl"
 cp -f "$TMP/dl-index.html" "$APP_DIR/dl/index.html"
