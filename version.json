@@ -3,6 +3,6 @@
   "name": "3.42.1",
   "url": "https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.1.apk",
   "sig": "520e52a770b2a07f",
-  "note": "· 介绍文案统一：不再把「离线 / 断网可用」当卖点，分享给好友的文案一并改了\n· 社区牌组是「牌组」栏的第三页，和调查员、我的牌组并排，左右滑得通\n· 设置 → 关于 →「分享给好友」：二维码 + 下载地址\n· 第一次看到带下划线的术语，会告诉你能点",
-  "note_en": "· Copy pass: no longer markets the app as offline/works-without-network; share text updated too\n· Community decks is the third page of the Decks tab and swipes like the others\n· Settings → About → Share: QR code + download link\n· First underlined term now explains that it's tappable"
+  "note": "· 介绍与分享文案措辞更准确，不再强调不需要网络\n· 社区牌组是「牌组」栏的第三页，和调查员、我的牌组并排，左右滑得通\n· 设置 → 关于 →「分享给好友」：二维码 + 下载地址\n· 第一次看到带下划线的术语，会告诉你能点",
+  "note_en": "· Clearer wording in the store page and share text\n· Community decks is the third page of the Decks tab and swipes like the others\n· Settings → About → Share: QR code + download link\n· First underlined term now explains that it's tappable"
 }
