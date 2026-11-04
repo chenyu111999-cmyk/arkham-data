@@ -1,8 +1,1 @@
-{
-  "code": 212,
-  "name": "3.38.0",
-  "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.38.0.apk",
-  "sig": "520e52a770b2a07f",
-  "note": "· 新增「社区牌组」：玩家可投稿、投票，按票数排名并显示自己的名次\n· 「我的牌组」长按可分享牌组码，或一键投稿到社区\n· 社区页支持按职业与风格筛选（战斗 / 调查 / 资源 / 法术），并新增「我的」分类\n· 玩家投稿排在参考牌组之前，不再被高赞参考牌组压到列表底部\n· 牌组码可扫码导入，213 套真实牌组实测零失败",
-  "note_en": "· New Community Decks: submit and vote, ranked by votes with your own rank shown\n· Long-press a deck to share its deck code or submit it to the community\n· Filter community decks by class and playstyle, plus a \"Mine\" tab\n· Player submissions now rank above reference decks\n· Deck codes importable via QR, 213 real decks tested with zero failures"
-}
+{}
