@@ -21,6 +21,7 @@ PORT=${PORT:-8443}
 BASE=${BASE:-https://gh-proxy.com/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/deploy}
 NODE=/usr/local/bin/node
 TS=$(date +%Y%m%d-%H%M%S)
+BUST=$(date +%s)   # 拼在 URL 后面破 CDN 缓存，否则刚推的文件可能拿到几分钟前的旧版
 
 ok()   { printf '  \033[32m✓\033[0m %s\n' "$1"; }
 warn() { printf '  \033[33m!\033[0m %s\n' "$1"; }
@@ -54,7 +55,7 @@ say "1/6 拉取新文件"
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 for f in worker.js server.mjs schema.sql dl-index.html; do
-  if ! curl -fsSL -m 90 -o "$TMP/$f" "$BASE/$f"; then
+  if ! curl -fsSL -m 90 -o "$TMP/$f" "$BASE/$f?t=$BUST"; then
     bad "下载 $f 失败，检查网络或镜像地址"
     warn "可以换镜像重试：BASE=https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/deploy sudo bash $0"
     exit 1
