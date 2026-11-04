@@ -1,8 +1,8 @@
 {
-  "code": 216,
-  "name": "3.41.0",
-  "url": "https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.41.0.apk",
+  "code": 217,
+  "name": "3.42.0",
+  "url": "https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.0.apk",
   "sig": "520e52a770b2a07f",
-  "note": "· 修好了「下载并安装」：以前只认一个下载地址，那条路被挡就彻底装不上；现在会依次试四条线路，哪条通用哪条\n· 检查更新不再被旧缓存拖住，改完清单几分钟内生效\n· 启动时每天查一次新版本（原来 7 天）",
-  "note_en": "· Fixed in-app updates: it no longer depends on a single download URL — four mirrors are tried in turn\n· Update checks are no longer stuck behind stale CDN caches\n· Startup check now runs daily instead of weekly"
+  "note": "· 社区牌组并进了「牌组」这一栏：跟调查员、我的牌组并排，左右滑得通\n· 新增「分享给好友」：二维码 + 下载地址，设置 → 关于\n· 第一次看到带下划线的术语，会告诉你能点\n· 两张收款码调成一样大；去掉匿名统计开关",
+  "note_en": "· Community decks is now the third page of the Decks tab — swipeable like the others\n· New \"Share with a friend\": QR code + download link in Settings → About\n· First time you see an underlined term, the app tells you it's tappable\n· Both tip QR codes now render at the same size; removed the stats toggle"
 }

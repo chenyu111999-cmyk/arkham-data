@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>AH 卡牌助手 v3.41.0 · 下载</title>
+<meta name="theme-color" content="#0d1512">
+<title>AH 卡牌助手 · 诡镇奇谈离线卡牌与牌组工具</title>
+<meta name="description" content="《诡镇奇谈 LCG》的离线卡牌查询、牌组构筑、混乱袋与战役记录工具。免费、无广告、无需注册，单文件 899 KB。">
 <style>
   :root{
     --ink:#0d1512;
@@ -12,171 +14,345 @@
     --paper-dim:#a9a292;
     --gold:#c9a227;
     --gold-soft:#e0c264;
-    --line:rgba(232,224,205,.14);
+    --line:rgba(232,224,205,.13);
+    --card:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.014));
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
   body{
     background:
-      radial-gradient(120% 80% at 50% -10%, #1c2b24 0%, #0d1512 55%, #080d0b 100%);
+      radial-gradient(120% 70% at 50% -8%, #20332a 0%, #0d1512 52%, #070c0a 100%);
     color:var(--paper);
     font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     min-height:100vh;
-    padding:32px 20px 56px;
-    line-height:1.65;
+    padding:0 20px;
+    line-height:1.68;
     letter-spacing:.01em;
+    -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:520px;margin:0 auto}
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+    background-image:
+      repeating-linear-gradient(0deg,rgba(232,224,205,.025) 0 1px,transparent 1px 3px),
+      repeating-linear-gradient(90deg,rgba(232,224,205,.02) 0 1px,transparent 1px 4px);
+    mask-image:radial-gradient(120% 60% at 50% 0%,#000 0%,transparent 78%);
+    -webkit-mask-image:radial-gradient(120% 60% at 50% 0%,#000 0%,transparent 78%);
+  }
+  .wrap{max-width:600px;margin:0 auto;position:relative;padding:30px 0 96px}
+
+  .brand{display:flex;align-items:center;gap:11px;margin-bottom:34px}
+  .mark{
+    width:38px;height:38px;border-radius:10px;flex:0 0 auto;
+    background:linear-gradient(160deg,#26382f,#17241d);
+    border:1px solid rgba(201,162,39,.45);
+    display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;font-size:12px;letter-spacing:.08em;
+    color:var(--gold-soft);font-weight:700;
+  }
+  .brand b{font-size:14px;font-weight:600;letter-spacing:.02em}
+  .brand span{display:block;font-size:11px;color:#7f7a6c;letter-spacing:.14em;text-transform:uppercase}
+
   .eyebrow{
-    font-size:12px;letter-spacing:.24em;text-transform:uppercase;
-    color:var(--gold);opacity:.85;margin-bottom:10px;
+    font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--gold);opacity:.8;margin-bottom:12px;
   }
   h1{
     font-family:Georgia,"Songti SC","Noto Serif SC",serif;
-    font-size:29px;line-height:1.28;margin:0 0 6px;font-weight:600;
-    color:#f3ecdc;
+    font-size:32px;line-height:1.25;margin:0 0 12px;font-weight:600;color:#f4eddd;
   }
-  .sub{color:var(--paper-dim);font-size:14px;margin:0 0 26px}
-  .card{
-    background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:20px;
-    margin-bottom:16px;
+  .lede{font-size:15px;color:#c4bda9;margin:0 0 22px}
+  .lede em{color:var(--gold-soft);font-style:normal}
+
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+  .tag{
+    font-size:11.5px;padding:4px 10px;border-radius:20px;
+    border:1px solid var(--line);color:#b9b2a0;background:rgba(232,224,205,.04);
   }
+  .tag.on{border-color:rgba(201,162,39,.4);color:var(--gold-soft);background:rgba(201,162,39,.08)}
+
   .btn{
-    display:flex;align-items:center;justify-content:center;gap:9px;
-    width:100%;
-    background:linear-gradient(180deg,#dcbe55,#b9962a);
-    color:#1a1408;
-    text-decoration:none;
-    font-size:17px;font-weight:700;
-    padding:16px 18px;
-    border-radius:12px;
-    border:1px solid #e8d283;
-    box-shadow:0 8px 24px -10px rgba(201,162,39,.75);
+    display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+    background:linear-gradient(180deg,#dcbe55,#b8962a);
+    color:#1a1408;text-decoration:none;font-size:17px;font-weight:700;
+    padding:17px 18px;border-radius:13px;border:1px solid #e8d283;
+    box-shadow:0 10px 28px -12px rgba(201,162,39,.8);
     transition:transform .12s ease,filter .12s ease;
   }
   .btn:active{transform:translateY(1px) scale(.995);filter:brightness(.95)}
   .btn svg{width:19px;height:19px;flex:0 0 auto}
+
   .meta{
-    display:flex;justify-content:space-between;gap:12px;
-    margin-top:14px;font-size:12.5px;color:var(--paper-dim);
+    display:flex;justify-content:space-between;gap:14px;
+    margin-top:12px;font-size:12px;color:#8d8878;
   }
-  .meta span:last-child{text-align:right;word-break:break-all}
-  code{
+  .meta code{
     font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-    font-size:12px;color:var(--gold-soft);
+    font-size:11.5px;color:var(--gold-soft);
   }
+
+  section{margin-top:38px}
   h2{
-    font-size:13px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--gold);margin:0 0 12px;font-weight:600;opacity:.9;
+    font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 14px;font-weight:600;opacity:.9;
   }
-  ul{margin:0;padding-left:18px}
-  li{font-size:14px;color:#d9d2c1;margin-bottom:8px}
-  li::marker{color:var(--gold);opacity:.7}
-  ol{margin:0;padding-left:18px}
-  ol li{margin-bottom:10px}
-  .note{
-    font-size:12.5px;color:var(--paper-dim);
-    border-left:2px solid rgba(201,162,39,.5);
-    padding-left:12px;margin:0;
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:15px;padding:20px;
   }
-  .warn{
-    margin-top:16px;font-size:12.5px;line-height:1.6;
-    background:rgba(201,162,39,.08);
-    border:1px solid rgba(201,162,39,.28);
-    border-radius:10px;padding:12px 14px;color:#ded5bd;
+  p{margin:0 0 12px}
+  p:last-child{margin-bottom:0}
+  .muted{color:var(--paper-dim);font-size:13.5px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .feat{
+    background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:15px 14px;position:relative;overflow:hidden;
   }
-  footer{
-    margin-top:26px;text-align:center;
-    font-size:11.5px;color:#6e6a5e;letter-spacing:.06em;
+  .feat::after{
+    content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;
+    background:linear-gradient(180deg,var(--gold),transparent);opacity:.5;
   }
-  .divider{
-    height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);
-    margin:22px 0;
+  .feat svg{width:19px;height:19px;stroke:var(--gold-soft);fill:none;stroke-width:1.6;
+    stroke-linecap:round;stroke-linejoin:round;margin-bottom:9px;display:block}
+  .feat b{display:block;font-size:14px;font-weight:600;color:#eee7d6;margin-bottom:3px}
+  .feat span{font-size:12px;color:#9a9484;line-height:1.55;display:block}
+
+  ul.plain{margin:0;padding-left:17px}
+  ul.plain li{font-size:13.5px;color:#d3ccbb;margin-bottom:9px}
+  ul.plain li:last-child{margin-bottom:0}
+  ul.plain li::marker{color:rgba(201,162,39,.65)}
+  ul.plain strong{color:#f0e9d8}
+
+  ol.steps{margin:0;padding-left:0;list-style:none;counter-reset:s}
+  ol.steps li{
+    counter-increment:s;position:relative;padding-left:38px;margin-bottom:16px;
+    font-size:13.5px;color:#d3ccbb;
   }
-  .mirrors{
-    display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px;
+  ol.steps li:last-child{margin-bottom:0}
+  ol.steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;
+    width:25px;height:25px;border-radius:50%;
+    border:1px solid rgba(201,162,39,.45);color:var(--gold-soft);
+    font-size:12px;display:flex;align-items:center;justify-content:center;
+    font-family:Georgia,serif;
   }
+  ol.steps b{color:#f0e9d8;font-weight:600}
+
+  .mirrors{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:4px}
   .mirrors a{
     display:flex;align-items:center;justify-content:center;
-    padding:11px 8px;border-radius:9px;
-    background:rgba(232,224,205,.07);
-    border:1px solid var(--line);
-    color:var(--paper);text-decoration:none;
-    font-size:13.5px;letter-spacing:.03em;
+    padding:11px 8px;border-radius:10px;
+    background:rgba(232,224,205,.06);border:1px solid var(--line);
+    color:var(--paper);text-decoration:none;font-size:13px;
     transition:background .12s ease;
   }
-  .mirrors a:active{background:rgba(232,224,205,.16)}
-  .mirrors a.self{grid-column:1/-1;border-color:rgba(201,162,39,.55);color:#e0c264}
+  .mirrors a:active{background:rgba(232,224,205,.15)}
+  .mirrors a.self{grid-column:1/-1;border-color:rgba(201,162,39,.5);color:var(--gold-soft)}
+
+  details{border-bottom:1px solid var(--line);padding:13px 0}
+  details:last-of-type{border-bottom:none;padding-bottom:0}
+  details:first-of-type{padding-top:0}
+  summary{
+    font-size:14px;color:#e6dfcd;cursor:pointer;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--gold);font-size:17px;line-height:1;flex:0 0 auto}
+  details[open] summary::after{content:"–"}
+  details p{font-size:13px;color:#a9a292;margin:9px 0 0;line-height:1.7}
+
+  .warn{
+    margin-top:18px;font-size:12.5px;line-height:1.65;
+    background:rgba(201,162,39,.07);border:1px solid rgba(201,162,39,.25);
+    border-radius:11px;padding:13px 15px;color:#ded5bd;
+  }
+  .warn b{color:var(--gold-soft)}
+
+  footer{
+    margin-top:44px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:11px;color:#6b675b;line-height:1.9;text-align:center;
+  }
+
+  .dock{
+    position:fixed;left:0;right:0;bottom:0;z-index:9;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(9,14,12,0),rgba(9,14,12,.92) 32%);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    transform:translateY(110%);transition:transform .22s ease;
+    pointer-events:none;
+  }
+  .dock.show{transform:translateY(0);pointer-events:auto}
+  .dock .btn{font-size:15px;padding:13px}
+
+  @media (max-width:380px){
+    h1{font-size:27px}
+    .grid{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="eyebrow">Arkham Horror · Card Helper</div>
-  <h1>AH 卡牌助手 v3.41.0</h1>
-  <p class="sub">安卓安装包 · 单文件 814 KB · 国内加速线路 · 无广告、无联网账号</p>
 
-  <div class="card">
-    <a class="btn" href="https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.41.0.apk" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/>
-      </svg>
+  <div class="brand">
+    <div class="mark">AHC</div>
+    <div>
+      <b>AH 卡牌助手</b>
+      <span>Arkham Horror · Unofficial</span>
+    </div>
+  </div>
+
+  <div class="eyebrow">Android · 单文件 · 离线可用</div>
+  <h1>整副牌，<br>整个牌桌</h1>
+  <p class="lede">《诡镇奇谈 LCG》的查卡、组牌、混乱袋、战役记录，一个 App 全包。<em>不用注册、没有广告、断网也能用</em>——跑团时信号最差的地下室，正是它该派上用场的地方。</p>
+
+  <div class="tags">
+    <span class="tag on">免费</span>
+    <span class="tag">无账号</span>
+    <span class="tag">无广告</span>
+    <span class="tag">899 KB</span>
+    <span class="tag">Android 7.0+</span>
+  </div>
+
+  <div class="card" style="padding:16px">
+    <a class="btn" id="dl" href="https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.0.apk" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
       下载安装包
     </a>
     <div class="meta">
-      <span>版本 3.41.0（code 216）</span>
-      <span>Android 7.0+</span>
+      <span>版本 3.42.0（code 217）</span>
+      <span>919,958 B</span>
     </div>
     <div class="meta">
       <span>MD5</span>
-      <span><code>3abb4add…4312</code></span>
+      <span><code>0e6679c8…30b8</code></span>
     </div>
   </div>
 
-  <div class="card">
+  <section>
+    <h2>它能做什么</h2>
+    <div class="grid">
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="11" height="16" rx="1.5"/><path d="M17 6h3.5v14H14"/><path d="M6.5 8.5h4M6.5 12h4"/></svg>
+        <b>全卡池查询</b>
+        <span>中文卡表随身带，按职业、类型、等级、扩展筛，点开就是完整规则文本</span>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><path d="M4 7h7l2 3h7"/><path d="M4 13h4M12 17h8"/><circle cx="18" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+        <b>牌组构筑</b>
+        <span>按职业与等级规则校验，组好的牌换成一串牌组码，发给队友就能导入</span>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><path d="M5 9.5c0-3 2.6-5 7-5s7 2 7 5-2.6 6-7 6-7-3-7-6z"/><path d="M9 15.5c.6 2 1.7 3.2 3 3.2s2.4-1.2 3-3.2"/><path d="M10 8.5h4"/></svg>
+        <b>混乱袋与检定</b>
+        <span>抽袋自动记账，检定直接算成功等级，袋里少了哪颗标记一目了然</span>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><path d="M4 5.5h9a2 2 0 0 1 2 2V20a2 2 0 0 0-2-2H4z"/><path d="M20 5.5h-3a2 2 0 0 0-2 2V20a2 2 0 0 1 2-2h3z"/></svg>
+        <b>战役记录</b>
+        <span>剧本进度、经验、创伤、结局分支记在本机，下次开场接着上一幕</span>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><path d="M3.5 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 7.5a3 3 0 0 1 0 5.6M17.5 20c0-2-.8-3.6-2-4.6"/></svg>
+        <b>社区牌组</b>
+        <span>看别人怎么组，一键导入自己的；投出去的牌组带实时名次</span>
+      </div>
+      <div class="feat">
+        <svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M8 9h8M8 13h5"/><path d="M3.5 8.5h17"/></svg>
+        <b>桌面计数器</b>
+        <span>血量、神智、线索、资源各一格，点一下就加减，不用再翻骰子</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2>这一版改了什么</h2>
-    <ul>
-      <li><strong>修好了「下载并安装」</strong>：以前只认一个下载地址，那条路被挡就彻底装不上——上一版正是卡在这里。现在会依次试四条线路，哪条通用哪条，全都不行才打开下载页</li>
-      <li><strong>检查更新不再被旧缓存拖住</strong>：以前改了版本清单，手机上可能要等十几小时才看到；现在每次点检查都是最新的，新版本几分钟内就能收到</li>
-      <li>启动时<strong>每天查一次</strong>新版本（原来 7 天），不用自己去设置里点</li>
-    </ul>
-    <div class="divider"></div>
-    <p class="note">社区牌组、投稿、投票需要联网；查卡、组牌、计数器等其余功能完全离线。已装旧版可直接覆盖安装；3.35.0 之前换过签名，需先卸载旧版。</p>
-  </div>
-
-  <div class="card">
-    <h2>安装三步</h2>
-    <ol>
-      <li>点上面按钮下载，等进度条走完</li>
-      <li>在通知栏或「文件管理 → Download」里点开这个 apk</li>
-      <li>若提示「禁止安装未知应用」，选<strong>允许来自此来源</strong>后返回继续</li>
-    </ol>
-  </div>
-
-  <div class="card">
-    <h2>下载没反应？换一条线路</h2>
-    <p class="note">下面几个按钮是同一份文件。线路 1 直接从本站取，最快也最稳；后面几条走加速节点，哪一个通用哪一个：</p>
-    <div class="mirrors">
-      <a class="self" href="http://124.220.165.198:8443/dl/arkham-helper-3.41.0.apk" rel="noopener">本站直连 · 最快</a>
-      <a href="https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.41.0.apk" rel="noopener">线路 2</a>
-      <a href="https://gh-proxy.com/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.41.0.apk" rel="noopener">线路 3</a>
-      <a href="https://ghproxy.net/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.41.0.apk" rel="noopener">线路 4</a>
-      <a href="https://hk.gh-proxy.com/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.41.0.apk" rel="noopener">线路 5</a>
+    <div class="card">
+      <ul class="plain">
+        <li><strong>社区牌组挪进了「牌组」这一栏</strong>，跟「调查员」「我的牌组」并排。以前它是顶栏尽头的一个跳转——另外两项能左右滑，它不能。现在三页滑得通，名字也改回「社区牌组」</li>
+        <li><strong>新增「分享给好友」</strong>：设置 → 关于，里面有二维码和下载地址，扫一下或者复制一条发过去都行</li>
+        <li><strong>第一次看卡会告诉你下划线能点</strong>。以前只有弹窗底部一行 12sp 小字，基本没人看得到</li>
+        <li>两张收款码调成了一样大，切换时不再忽大忽小</li>
+        <li>去掉了「匿名使用统计」开关——它统计的只是「今天有台设备打开过」，跨天就认不出是谁，没必要让人做这道选择题</li>
+      </ul>
     </div>
-    <div class="divider"></div>
-    <p style="font-size:11.5px;line-height:1.9;color:#8f8a7c;margin:0;word-break:break-all">
-      都不行的话，用原始地址（可能需要梯子）：<br>
-      <code style="font-size:11px">https://chenyu111999-cmyk.github.io/arkham-data/arkham-helper-3.41.0.apk</code>
-    </p>
-  </div>
+  </section>
 
-  <div class="warn">
-    在微信里打开本页时，点下载可能没反应：请点右上角「···」→<strong>在浏览器打开</strong>，再点下载按钮。
-  </div>
+  <section>
+    <h2>装上之后</h2>
+    <div class="card">
+      <ol class="steps">
+        <li><b>下载</b>：点上面的按钮，899 KB，网速正常几秒钟就好。手机若提示「禁止安装未知应用」，选<strong>允许来自此来源</strong>再返回继续。</li>
+        <li><b>打开就能用</b>：卡表、规则、混乱袋全部内置，第一次启动不需要联网。只有「社区牌组」那一页要联网，用来取别人的投稿和票数。</li>
+        <li><b>组第一副牌</b>：牌组 → 选调查员 → 挑卡，超出构筑规则会当场标出来。组完在「我的牌组」里长按卡片，可以分享牌组码，或投稿到社区。</li>
+      </ol>
+    </div>
+  </section>
 
-  <footer>AH 卡牌助手 · 数据全部保存在本机，不上传任何个人信息</footer>
+  <section>
+    <h2>下载没反应？换一条线路</h2>
+    <div class="card">
+      <p class="muted">下面几条是同一份文件。第一条直接从本站取，最快也最稳；后面几条走加速节点，哪条通用哪条。</p>
+      <div class="mirrors">
+        <a class="self" href="http://124.220.165.198:8443/dl/arkham-helper-3.42.0.apk" rel="noopener">本站直连 · 最快</a>
+        <a href="https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.0.apk" rel="noopener">线路 2</a>
+        <a href="https://gh-proxy.com/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.0.apk" rel="noopener">线路 3</a>
+        <a href="https://ghproxy.net/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.0.apk" rel="noopener">线路 4</a>
+        <a href="https://hk.gh-proxy.com/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.0.apk" rel="noopener">线路 5</a>
+      </div>
+    </div>
+    <div class="warn">
+      在<b>微信</b>里打开本页时，点下载可能没反应：点右上角「···」→<b>在浏览器打开</b>，再点下载。
+    </div>
+  </section>
+
+  <section>
+    <h2>常见问题</h2>
+    <div class="card">
+      <details>
+        <summary>要钱吗？有内购或广告吗？</summary>
+        <p>不要钱，没有内购，没有广告，没有开屏插屏。设置里有一个「打赏支持」，纯自愿，不给任何功能——这个 App 不给任何功能上锁。</p>
+      </details>
+      <details>
+        <summary>要注册账号吗？我的牌组会上传吗？</summary>
+        <p>不需要账号。牌组、战役、设置全部存在手机本地，卸载才会没。只有你主动「投稿到社区」的那一套会上传，作者审核后才公开，昵称也是你自己填的。</p>
+      </details>
+      <details>
+        <summary>换手机怎么把牌组搬过去？</summary>
+        <p>设置 → 导出备份，得到一个文件；新手机装好后走「恢复备份」。也可以只把某副牌组转成牌组码，发给新设备导入。</p>
+      </details>
+      <details>
+        <summary>装新版本要卸载吗？数据会丢吗？</summary>
+        <p>不用卸载，直接覆盖安装，牌组和设置都保留。只有 3.35.0 之前的老版本换过签名，那批需要先卸载——卸载会清掉本地数据，能导备份就先导。</p>
+      </details>
+      <details>
+        <summary>卡图显示不出来？</summary>
+        <p>卡图是可选的在线资源，第一次看某张卡时会尝试下载并缓存，之后离线也能看。没有网络时只显示文字规则，不影响查卡和组牌。</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    AH 卡牌助手 · 非官方粉丝工具，与 Fantasy Flight Games、Asmodee 及游人码头无隶属关系<br>
+    卡牌名称、文本与插画版权归各自权利人所有，本工具仅供学习交流，不作商业用途<br>
+    数据保存在本机 · 不收集账号信息 · 每天仅记录一次「有设备打开过」，不含型号与位置
+  </footer>
 </div>
+
+<div class="dock" id="dock">
+  <a class="btn" href="https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.42.0.apk" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>
+    下载 v3.42.0 · 899 KB
+  </a>
+</div>
+
+<script>
+  (function () {
+    var main = document.getElementById('dl'), dock = document.getElementById('dock');
+    if (!main || !dock || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      dock.classList.toggle('show', !es[0].isIntersecting);
+    }, { threshold: 0 }).observe(main);
+  })();
+</script>
 </body>
 </html>
