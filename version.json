@@ -1,8 +1,8 @@
 {
-  "code": 214,
-  "name": "3.39.1",
-  "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.39.1.apk",
+  "code": 215,
+  "name": "3.40.0",
+  "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.40.0.apk",
   "sig": "520e52a770b2a07f",
-  "note": "· 社区页去掉「社区牌组」大标题，列表整体上移一行\n· 顶栏「社区」去掉右箭头；进到社区页后这个位置也显示「社区」\n· 点顶栏带下划线的文字会给一句提示，不再是点了没反应\n· 混乱袋难度按钮下方那条分隔线去掉，改用留白\n· 「我的牌组」每张卡片右侧的「分享」「投稿」按钮（3.39.0 起）",
-  "note_en": "· Removed the big \"Community Decks\" heading\n· Removed the arrow after \"Community\" in the top bar; the tab is also shown while inside the community page\n· Tapping the underlined tab now gives feedback instead of doing nothing\n· Removed the divider under the chaos bag difficulty buttons"
+  "note": "· 新增「匿名使用统计」：每天第一次打开 App 报一次「今天来过」，只发本机随机设备号，服务器存的是当天有效的哈希，不含手机型号、位置或任何账号信息；设置里可以关\n· 下载页搬到了自己的服务器，不再依赖第三方托管",
+  "note_en": "· Optional anonymous usage stats: one ping per day with a random device ID; the server keeps only a hash that expires daily. Can be turned off in Settings\n· Download page now self-hosted"
 }
