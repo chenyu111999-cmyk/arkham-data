@@ -1,7 +1,7 @@
 {
   "code": 215,
   "name": "3.40.0",
-  "url": "https://cdn.jsdelivr.net/gh/chenyu111999-cmyk/arkham-data@main/arkham-helper-3.40.0.apk",
+  "url": "https://ghfast.top/https://raw.githubusercontent.com/chenyu111999-cmyk/arkham-data/main/arkham-helper-3.40.0.apk",
   "sig": "520e52a770b2a07f",
   "note": "· 新增「匿名使用统计」：每天第一次打开 App 报一次「今天来过」，只发本机随机设备号，服务器存的是当天有效的哈希，不含手机型号、位置或任何账号信息；设置里可以关\n· 下载页搬到了自己的服务器，不再依赖第三方托管",
   "note_en": "· Optional anonymous usage stats: one ping per day with a random device ID; the server keeps only a hash that expires daily. Can be turned off in Settings\n· Download page now self-hosted"
